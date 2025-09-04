@@ -1,80 +1,85 @@
-# 🚀 tldr-pages: The Simplified, Community-Driven Command Line Reference
+# 🚀 TLDR Community Pages
 
-<p align="center"><img src="./images/banner.png" alt="tldr-pages Project Banner" width="700"></p>
+![TLDR Community Pages Banner](images/banner.png)
 
 ## Short Description
-`tldr-pages` is an indispensable, community-driven collection of simplified and practical examples for common command-line tools. Forget endless `man` pages; `tldr-pages` delivers immediate, actionable syntax and usage tips, tailored for various operating systems and localized into numerous languages. It's the ultimate quick reference for developers, system administrators, and anyone who lives in the terminal.
+
+**Never feel lost at the command line again!** This repository is the heart of the `tldr` project, a community-driven collection of simplified, example-rich man pages that make common command-line tools immediately understandable. Forget wading through verbose documentation; `tldr` delivers practical, real-world usage examples straight to your terminal, in your language.
 
 ## ✨ Key Features
-*   **Instant Command Examples:** Get straight to the point with practical, real-world examples for hundreds of commands.
-*   **Multi-Platform Support:** Access commands relevant to Android, Linux, macOS, Windows, FreeBSD, NetBSD, OpenBSD, SunOS, and even Cisco IOS.
-*   **Global Accessibility:** Content is translated and maintained across numerous languages, ensuring you get help in your preferred language.
-*   **Community-Powered:** A vibrant open-source community maintains and expands the content, ensuring accuracy and relevance.
-*   **Rich Contribution Guidelines:** Comprehensive guides and templates streamline contributions, making it easy for anyone to improve the project.
-*   **Automated Quality Assurance:** Robust CI/CD pipelines automate linting, testing, and formatting to maintain high content quality.
-*   **PDF Generation:** Scripts are available to generate beautiful, themed PDF versions of the pages for offline access or printing.
-*   **Developer-Friendly Setup:** Includes `.devcontainer` configurations for seamless development in cloud or local VS Code environments.
+
+*   **🌐 Multilingual Support:** Commands are translated and maintained in numerous languages, ensuring accessibility for a global audience. (e.g., Arabic, Bengali, Chinese, German, Spanish, French, Hindi, Indonesian, Italian, Japanese, Korean, Dutch, Polish, Portuguese, Russian, Swedish, Turkish, Ukrainian, and more!)
+*   **💻 Multi-Platform Coverage:** Examples for a vast array of operating systems and environments, including `common`, `Linux`, `macOS (osx)`, `Windows`, `Android`, `FreeBSD`, `NetBSD`, `OpenBSD`, `Solaris (sunos)`, and `Cisco IOS`.
+*   **🤝 Community-Powered:** Driven by a passionate global community, ensuring up-to-date and relevant examples for thousands of commands. Contributions are highly encouraged and streamlined.
+*   **⚙️ Robust CI/CD Pipeline:** Automated checks for syntax, style, and consistency ensure high-quality content. Dependabot keeps our dependencies secure and updated.
+*   **📦 Comprehensive Contribution Guides:** Detailed guides for maintainers, style guidelines (including localized versions), and Git terminal usage make contributing straightforward for everyone.
+*   **🚀 Developer-Friendly Environment:** Ready-to-use development container configuration for VS Code, enabling instant setup and smooth development workflows.
+*   **📄 Content Generation & Tooling:** Scripts for building indices, generating PDF documentation, and managing page aliases and links, providing versatile ways to consume and maintain content.
 
 ## Who is this for?
-*   **Command Line Enthusiasts:** Developers, DevOps engineers, and system administrators looking for faster, more digestible command-line help.
-*   **New CLI Users:** A perfect entry point for those intimidated by traditional `man` pages.
-*   **Open Source Contributors:** Individuals passionate about technical writing and community-driven documentation.
-*   **Multi-Lingual Teams:** Anyone needing command references in languages other than English.
+
+*   **Developers & System Administrators:** Quickly recall complex command syntax or discover new usages.
+*   **Beginners:** Get up and running with command-line tools without the steep learning curve.
+*   **Open Source Enthusiasts:** Contribute to a widely used project, practice writing technical documentation, or get involved in translation efforts.
+*   **Educators:** Provide clear, concise examples for teaching command-line fundamentals.
+*   **Anyone who uses the terminal!**
 
 ## Technology Stack & Architecture
-The `tldr-pages` project is a documentation repository, emphasizing content over complex application logic, yet it utilizes a robust set of tools for content management and delivery.
+
+Our project leverages a simple yet powerful stack for content management, automation, and delivery:
 
 *   **Content Format:** Markdown (`.md`)
-*   **Scripting & Automation:** Python (for rendering, command updates, bot interactions), Bash (for CI/CD, build, and deployment scripts)
-*   **Build & Tooling:** Node.js/NPM (`package.json`) for managing development dependencies.
-*   **Styling & Fonts:** CSS (`.css`) and TrueType Fonts (`.ttf`) for aesthetically pleasing PDF outputs.
-*   **Continuous Integration/Delivery (CI/CD):** GitHub Actions (`.github/workflows`) for automated testing, linting, code spell checking, and deployment.
-*   **Code Quality:** `flake8` (Python linting), `markdownlint` (Markdown linting), `codespell` (spell checking), `.editorconfig` for consistent formatting.
-*   **Developer Experience:** `.devcontainer` for standardized development environments.
+*   **Scripting & Automation:** Python, JavaScript (Node.js), Shell Scripting
+*   **Package Management:** npm (`package.json`) for JavaScript, pip (`requirements.txt`) for Python
+*   **Continuous Integration/Deployment:** GitHub Actions
+*   **Code Quality:** Flake8, Markdownlint, Codespell
+*   **Development Environment:** VS Code Dev Containers
+*   **Branding & Assets:** Fonts (`.ttf`), Images (`.png`, `.svg`)
 
 ## 📊 Architecture & Database Schema
-This project is a static content repository, not a traditional application with a database. Its "architecture" defines the flow of content creation and distribution.
+
+The TLDR project's "database" is its intelligently structured file system, enabling flexible content management and rapid retrieval.
 
 ```mermaid
 graph TD
-    A["Contributor"] --> B["Create/Update .md Page(s)"];
-    B --> C["Submit Pull Request"];
-    C --> D["GitHub CI/CD (Lint, Test, Format)"];
-    D -- Success --> E["Build & Render Content (e.g., PDF)"];
-    E --> F["Deploy Content (e.g., to CDN/Website)"];
-    D -- Failure --> G["Notify Contributor (Review Feedback)"];
-    F --> H["Users Access tldr Pages"];
+    A["Contributor"] --> B("Pull Request");
+    B --> C{"GitHub Actions CI"};
+    C -- "Passes Checks" --> D["Merge to Main Branch"];
+    D --> E("Automated Build Scripts");
+    E -- "Generates Index & Assets" --> F["Distributable Content (e.g., JSON, PDF)"];
+    F --> G["TLDR Client Application"];
+    G --> H["End User"];
+
+    subgraph Pages Structure
+        I["/pages/{lang}/{platform}/{command}.md"]
+    end
+    E -- "Parses" --> I;
+    I -- "Feeds" --> E;
 ```
 
 ## ⚡ Quick Start Guide
-To quickly get up and running with `tldr-pages`:
+
+Ready to dive in or contribute?
 
 1.  **Clone the Repository:**
     ```bash
-    git clone https://github.com/your-org/tldr-pages.git
-    cd tldr-pages
+    git clone https://github.com/tldr-pages/tldr.git
+    cd tldr
     ```
-2.  **Explore Pages:**
-    Browse the `pages/` directory to explore command examples for various platforms and languages. For instance, to see common Linux commands:
+2.  **Explore the Pages:**
+    Browse the `pages/` directory to see the organized command-line examples. For instance:
     ```bash
-    ls pages/linux/
-    cat pages/linux/apt.md
+    # View common 'git' commands in English
+    cat pages/common/git.md
+
+    # View 'apt' commands for Linux in German
+    cat pages.de/linux/apt.md
     ```
-3.  **Contribute to the Project:**
-    To add new pages or improve existing ones, refer to our detailed contribution guidelines:
-    ```bash
-    cat CONTRIBUTING.md
-    cat contributing-guides/style-guide.md
-    ```
-4.  **Generate PDF (Optional):**
-    If you want to create a local PDF version of the pages:
-    ```bash
-    # Install Python dependencies for PDF generation
-    pip install -r scripts/pdf/requirements.txt
-    
-    # Run the PDF build script
-    ./scripts/pdf/build-pdf.sh
-    ```
+3.  **Contribute:**
+    We welcome all contributions! Check out our comprehensive guides to get started:
+    *   [Contributing Guide](CONTRIBUTING.md)
+    *   [Style Guide](contributing-guides/style-guide.md)
 
 ## 📜 License
+
 This project is licensed under the [MIT License](LICENSE.md).
